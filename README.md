@@ -1,37 +1,45 @@
-### Objective
+# URL Shortener Service
 
-Your assignment is to implement a URL shortening service using Java and Spring.
+## Overview
 
-### Brief
+The URL Shortener Service is a Java Spring Boot application that provides APIs for shortening URLs and expanding shortened URLs back to their original form. This service is designed to be simple and efficient, keeping the shortened URLs in memory.
 
-ShortLink is a URL shortening service where you enter a URL such as https://codesubmit.io/library/react and it returns a short URL such as http://short.est/GeAi9K.
+## How to Run
 
-### Tasks
+To run this application:
 
--   Implement assignment using:
-    -   Language: **Java**
-    -   Framework: **Spring**
-    -   Two endpoints are required
-        -   /encode - Encodes a URL to a shortened URL
-        -   /decode - Decodes a shortened URL to its original URL.
-    -   Both endpoints should return JSON
-    -   Choose the HTTP verbs that make the most sense.
--   There is no restriction on how your encode/decode algorithm should work. You just need to make sure that a URL can be encoded to a short URL and the short URL can be decoded to the original URL. **You do not need to persist short URLs to a database. Keep them in memory.**
--   Provide detailed instructions on how to run your assignment in a separate markdown file
--   Provide API tests for both endpoints
+1. Ensure you have Java JDK 11 and Maven installed.
+2. Navigate to the root directory of the project.
+3. Run the application using Maven:
 
-### Evaluation Criteria
+## Endpoints
 
--   Java & Spring best practices
--   API implemented featuring a /encode and /decode endpoint
--   Tests
--   Implementation of the shortening algorithm (Algorithm Correctness, Requirement Fulfillment)
--   Original code. We want to evaluate your programming skills, copy-pasting a solution does not help with that and will lead to a rejection.
+The service provides two main endpoints:
 
-### CodeSubmit
+- `POST /api/url/encode`: Accepts a URL in the request body and returns a shortened URL.
+- `GET /api/url/decode/{shortUrlKey}`: Accepts a short URL key as a path variable and returns the original URL.
 
-Please organize, design, test and document your code as if it were going into production - then push your changes to the master branch. After you have pushed your code, you may submit the assignment on the assignment page.
+Both endpoints communicate via JSON format.
 
-All the best and happy coding,
+## Usage
 
-The objego Team
+### Encoding a URL
+
+Send a POST request to `/api/url/encode` with the original URL in the request body:
+
+###json
+{
+"longUrl": "https://www.yahoo.com"
+}
+The response will be a JSON object containing the shortened URL key:
+{
+  "shortUrlKey": "abc123"
+}
+
+### Decoding a URL
+Send a GET request to /api/url/decode/{shortUrlKey} replacing {shortUrlKey} with the key you received from the encode endpoint.
+
+The response will be a JSON object containing the original long URL:
+{
+  "longUrl": "https://www.example.com"
+}
